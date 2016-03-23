@@ -23,6 +23,7 @@ namespace OptionsWebSite.Controllers
         public ActionResult Index()
         {
             var choices = db.Choices.Include(c => c.FirstOption).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption).Include(c => c.YearTerm);
+            ViewBag.yearTerms = db.YearTerms.ToList();
             return View(choices.ToList());
         }
 
@@ -97,11 +98,14 @@ namespace OptionsWebSite.Controllers
                 ViewBag.YearTermIdValue = 0;
                 ViewBag.YearTermDisplay = "N/A";
             }
-            
+
+            var defaultTerm = db.YearTerms.Where(a => a.IsDefault).ToList();
+
+         
 
             foreach (var id in sId)
             {
-                if (id.StudentId == user.UserName)
+                if (id.StudentId == user.UserName && defaultTerm.ElementAt(0).YearTermId == id.YearTermId)
                 {
                     ViewBag.Error = "Already Choosen options";
                     return View();
@@ -148,9 +152,11 @@ namespace OptionsWebSite.Controllers
             //}
                
             var sId = db.Choices.ToList();
+            var defaultTerm = db.YearTerms.Where(a => a.IsDefault).ToList();
+  
             foreach (var id in sId)
             {
-                if (id.StudentId == choice.StudentId)
+                if (id.StudentId == user.UserName && defaultTerm.ElementAt(0).YearTermId == id.YearTermId)
                 {
                     ViewBag.Error = "Already Choosen options";
                     return View();
@@ -257,6 +263,23 @@ namespace OptionsWebSite.Controllers
             {
                 return HttpNotFound();
             }
+
+            var a = db.Options.Find(choice.FirstChoiceOptionId);
+            var b = db.Options.Find(choice.SecondChoiceOptionId);
+            var c = db.Options.Find(choice.ThirdChoiceOptionId);
+            var d = db.Options.Find(choice.FourthChoiceOptionId);
+            var e = db.YearTerms.Find(choice.YearTermId);
+
+            ViewBag.f = a.Title;
+            ViewBag.s = b.Title;
+            ViewBag.t = c.Title;
+            ViewBag.z = d.Title;
+            ViewBag.q = e.Year + " ";
+
+            if (e.Term == 10) ViewBag.q += "Winter";
+            else if (e.Term == 20) ViewBag.q += "Spring/Summer";
+            else if (e.Term == 30) ViewBag.q += "Fall";
+            else ViewBag.q += ":(";
             return View(choice);
         }
 

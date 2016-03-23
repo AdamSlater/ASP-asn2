@@ -10,20 +10,83 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div class="table-responsive">
+
+<label for="yearterms">YearTerms</label>
+<select id="yearterms">
+    @foreach (var year in ViewBag.yearTerms)
+    {
+        <option @if (year.IsDefault) { @Html.AttributeEncode("selected") } value="@year.YearTermId">
+            @year.Year &nbsp; @year.Term
+        </option>
+    }
+</select>
+
+<label for="charttypes">ChartTypes</label>
+<select id="charttypes">
+    <option selected>Details Report</option>
+    <option>Chart</option>
+</select>
+<br />
+<script>
+    $(document).ready(function () {
+        var visibleId = $('#yearterms').find(":selected").val();
+        $('.tr').each(function (index) {
+            if (!$(this).hasClass(visibleId))
+                $(this).addClass('hide');
+        });
+    });
+    $('#yearterms').change(function (data) {
+        $('.tr').addClass('hide');
+        var c = $('#yearterms').find(":selected").val();
+        $('.' + c).removeClass('hide');
+    });
+
+    $('#charttypes').change(function (data) {
+        $('#charts, #reports').toggleClass('hide');
+        var c = $('#charttypes').find(":selected").val();
+        if (c == 'Chart')
+        { d1(); d2(); d3(); d4(); }
+    });
+</script>
+<br />
+<style> .border-right { border-right: solid } .border-bottom { border-bottom: solid } text[text-anchor="end"] { display:none }</style>
+<div id="charts" class="hide row">
+    <div class="">
+        <div class="col-md-6 border-right border-bottom">
+            <div id="choices-1" style="min-width: 310px; height: 400px; max-width:600px; margin: 0 auto"></div>
+        </div>
+        <div class="col-md-6 border-bottom">
+            <div id="choices-2" style="min-width: 310px; height: 400px; max-width:600px; margin: 0 auto"></div>
+        </div>  
+    </div>
+    <br />
+    <div class="">
+        <div class="col-md-6 text-center border-right">
+            <div id="choices-3" style="min-width: 310px; height: 400px; max-width:600px; margin: 0 auto"></div>
+        </div>
+        <div class="col-md-6 text-center">
+            <div id="choices-4" style="min-width: 310px; height: 400px; max-width:600px; margin: 0 auto"></div>
+        </div>
+    </div>                        
+</div>
+<div id="reports" class="table-responsive">
     <table class="table table-striped">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOption.Title)
+                @*@Html.DisplayNameFor(model => model.FirstOption.Title)*@
+                First Option
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FourthOption.Title)
+                @*@Html.DisplayNameFor(model => model.FourthOption.Title)*@
+                Second Option
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SecondOption.Title)
+                @*@Html.DisplayNameFor(model => model.SecondOption.Title)*@
+                Third Option
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThirdOption.Title)
+                @*@Html.DisplayNameFor(model => model.ThirdOption.Title)*@
+                Fourth Option
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.YearTerm.YearTermId)*@
@@ -45,7 +108,7 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="tr @item.YearTermId">
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstOption.Title)
                 </td>
@@ -99,3 +162,250 @@
 
     </table>
 </div>
+<style>
+    .highcharts-button {
+        display: none
+    }
+</style>
+<script>
+    var optionsStrings;
+    var first, second, third, fourth;
+
+    $(document).ready(function () {
+        jQuery.support.cors = true;
+        $.ajax({
+            url: "http://localhost:58011/api/choices"
+        }).done(function (data) {
+            var num = data.numYearTerms;
+            var yeartermData = new Object();
+            optionsStrings = data.options;
+
+            $.each(data, function (i, item) {
+                if ($.isNumeric(i) && i > 0 && i <= num) // year terms
+                    yeartermData[i] = item;
+            });
+
+            console.log(yeartermData);
+
+            //TODO: loop through yeartermsData
+                // populate first, second...
+            console.log(data);
+        });
+    });
+    function d1() {
+        $('#choices-1').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Choices-1'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Microsoft Internet Explorer',
+                    y: 0.00
+                }, {
+                    name: 'Chrome',
+                    y: 0.00,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Firefox',
+                    y: 0.00
+                }, {
+                    name: 'Safari',
+                    y: 0.00
+                }, {
+                    name: 'Opera',
+                    y: 0.00
+                }, {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.00
+                }]
+            }]
+        });
+    }
+    function d2() {
+        $('#choices-2').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Choices-2'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Microsoft Internet Explorer',
+                    y: 56.33
+                }, {
+                    name: 'Chrome',
+                    y: 24.03,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Firefox',
+                    y: 10.38
+                }, {
+                    name: 'Safari',
+                    y: 4.77
+                }, {
+                    name: 'Opera',
+                    y: 0.91
+                }, {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.2
+                }]
+            }]
+        });
+    }
+    function d3() {
+        $('#choices-3').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Choices-3'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Microsoft Internet Explorer',
+                    y: 56.33
+                }, {
+                    name: 'Chrome',
+                    y: 24.03,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Firefox',
+                    y: 10.38
+                }, {
+                    name: 'Safari',
+                    y: 4.77
+                }, {
+                    name: 'Opera',
+                    y: 0.91
+                }, {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.2
+                }]
+            }]
+        });
+    }
+    function d4() {
+        $('#choices-4').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Choices-4'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Microsoft Internet Explorer',
+                    y: 56.33
+                }, {
+                    name: 'Chrome',
+                    y: 24.03,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Firefox',
+                    y: 10.38
+                }, {
+                    name: 'Safari',
+                    y: 4.77
+                }, {
+                    name: 'Opera',
+                    y: 0.91
+                }, {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.2
+                }]
+            }]
+        });
+    }
+</script>

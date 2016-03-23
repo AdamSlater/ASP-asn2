@@ -1,0 +1,22 @@
+.wrapper {
+    text-align: center;
+    height: 3em;
+    margin: 0 10em;
+}
+
+.view {
+    margin: 0 10em;
+}
+
+.tab {
+    font-weight: bolder;
+    font-size: 2em;
+    font-family: serif;
+}
+
+.tab:hover {
+    background: aliceblue;
+}
+.active {
+    background: lightblue;
+}

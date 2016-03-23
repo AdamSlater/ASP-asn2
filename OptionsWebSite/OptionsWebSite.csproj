@@ -208,18 +208,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ApplicationsMigrations\201602160048215_InitialCreate.cs" />
-    <Compile Include="Migrations\ApplicationsMigrations\201602160048215_InitialCreate.Designer.cs">
-      <DependentUpon>201602160048215_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ApplicationsMigrations\201602160117559_InitialCreate1.cs" />
-    <Compile Include="Migrations\ApplicationsMigrations\201602160117559_InitialCreate1.Designer.cs">
-      <DependentUpon>201602160117559_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\ApplicationsMigrations\201603170432160_InitUsers.cs" />
+    <Compile Include="Migrations\ApplicationsMigrations\201603170432160_InitUsers.Designer.cs">
+      <DependentUpon>201603170432160_InitUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationsMigrations\Configuration.cs" />
-    <Compile Include="Migrations\DiplomaMigrations\201602160102226_InitialCreate.cs" />
-    <Compile Include="Migrations\DiplomaMigrations\201602160102226_InitialCreate.Designer.cs">
-      <DependentUpon>201602160102226_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\DiplomaMigrations\201603170425069_InitSeed.cs" />
+    <Compile Include="Migrations\DiplomaMigrations\201603170425069_InitSeed.Designer.cs">
+      <DependentUpon>201603170425069_InitSeed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\DiplomaMigrations\201603170623188_InitSeed1.cs" />
+    <Compile Include="Migrations\DiplomaMigrations\201603170623188_InitSeed1.Designer.cs">
+      <DependentUpon>201603170623188_InitSeed1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\DiplomaMigrations\201603170624586_InitSeed2.cs" />
+    <Compile Include="Migrations\DiplomaMigrations\201603170624586_InitSeed2.Designer.cs">
+      <DependentUpon>201603170624586_InitSeed2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DiplomaMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -330,14 +334,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ApplicationsMigrations\201602160048215_InitialCreate.resx">
-      <DependentUpon>201602160048215_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ApplicationsMigrations\201603170432160_InitUsers.resx">
+      <DependentUpon>201603170432160_InitUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ApplicationsMigrations\201602160117559_InitialCreate1.resx">
-      <DependentUpon>201602160117559_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\DiplomaMigrations\201603170425069_InitSeed.resx">
+      <DependentUpon>201603170425069_InitSeed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\DiplomaMigrations\201602160102226_InitialCreate.resx">
-      <DependentUpon>201602160102226_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\DiplomaMigrations\201603170623188_InitSeed1.resx">
+      <DependentUpon>201603170623188_InitSeed1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\DiplomaMigrations\201603170624586_InitSeed2.resx">
+      <DependentUpon>201603170624586_InitSeed2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -354,7 +361,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54898</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
