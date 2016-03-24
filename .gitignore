@@ -217,7 +217,7 @@ _ReSharper.*
 bin
 obj
 packages
-<<<<<<< HEAD
+
 
 # Visual Studio 2015 cache/options directory
 .vs/
