@@ -32,6 +32,21 @@ app.controller('ctrl', function ($scope) {
         var username, password;
         username = $("#username").val();
         password = $("#pwd").val();
+
+        var param = {
+            grant_type: "password",
+            Username: username,
+            Password: password
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://a2api.adamslatertech.com/Token',
+            data: param
+        }).done(function (data) {
+            console.log(data);
+            document.cookie = "access_token=" + data["access_token"];
+        }).fail(function (err) { console.warn(err); });
     };
 });
 

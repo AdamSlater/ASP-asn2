@@ -283,3 +283,5 @@ C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\System.W
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\obj\Debug\OptionsWebAPI.csprojResolveAssemblyReference.cache
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\obj\Debug\OptionsWebAPI.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\obj\Debug\OptionsWebAPI.pdb
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\bin\Microsoft.Owin.Cors.dll
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\bin\Microsoft.Owin.Cors.xml
