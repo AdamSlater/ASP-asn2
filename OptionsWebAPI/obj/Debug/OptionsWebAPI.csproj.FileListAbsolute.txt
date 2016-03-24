@@ -188,6 +188,8 @@ C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\bin\System.Web
 C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\obj\Debug\OptionsWebAPI.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\obj\Debug\OptionsWebAPI.dll
 C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\obj\Debug\OptionsWebAPI.pdb
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\bin\Microsoft.Owin.Cors.dll
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebAPI\bin\Microsoft.Owin.Cors.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\ApplicationInsights.config
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\roslyn\csc.exe
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -219,6 +221,7 @@ C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsof
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.AspNet.Identity.Owin.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.Owin.Cors.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.Owin.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.Owin.Security.Cookies.dll
@@ -252,6 +255,7 @@ C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsof
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.ApplicationInsights.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Microsoft.Owin.Cors.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\System.Web.Http.Cors.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\Newtonsoft.Json.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebAPI\bin\System.Net.Http.Formatting.xml
