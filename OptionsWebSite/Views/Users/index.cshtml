@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "User List";
+}
+
+<h2>User Lists</h2>
+
+<script type="text/javascript">
+    function changeUserName(username, flag) {
+        $.post("Users/LockUser",
+            {
+                UserName: username,
+                flag: flag
+            }, function (data, status) {
+                console.log(data);
+                location.reload();
+            });
+    }
+</script>
+
+<table class="table table-striped">
+        <tr>
+            <th>
+                UserName
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+        
+        @foreach (var item in ViewBag.UserList)
+        {
+            <tr>
+                <td name="UserName" value="@item.UserName">@item.UserName</td>
+                <td>
+                    @if (item.LockoutEnabled)
+                    {
+                       
+                        
+                      <input type="checkbox" onchange="changeUserName('@item.UserName', 'on')" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
+                 
+
+                    }
+                    else
+                    {
+                        if (item.UserName == "A00111111")
+                        {
+                            <strong style="color:red">admin</strong>
+                        }
+                        else
+                        {
+                            <input type="checkbox" onchange="changeUserName('@item.UserName', 'off')" checked data-toggle="toggle" data-on="Enabled" data-off="Disabled">
+
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>

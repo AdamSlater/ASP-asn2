@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <h2>Create Role</h2>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <h2> @Html.ActionLink("Manage User Roles", "ManageUserRoles", "Roles") </h2>
+    </div>
+</div>
+
+<hr />
+
+<h3>@ViewBag.ResultMessage</h3>
+@using (Html.BeginForm("Create", "Roles"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        Role name
+    </div>
+    <p>
+        @Html.TextBox("RoleName", null,new { @class = "form-control" })
+    </p>
+    <input type="submit" value="Save" />
+}
+<hr />
+<h2>Current Roles </h2>
+<hr />
+<div>
+    <table class="table table-striped">
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>
+                    <strong>@role.Name  </strong>
+               </td>
+               <td>
+                    <span onclick="return confirm('Are you sure to delete?')"><a href="/Roles/Delete?RoleName=@role.Name" class="delLink" style="color:red;">Delete</a></span> |
+                    @Html.ActionLink("Edit", "Edit", new { roleName = @role.Name })
+                </td>
+            </tr>
+        }
+        </table>
+</div>
+<hr />

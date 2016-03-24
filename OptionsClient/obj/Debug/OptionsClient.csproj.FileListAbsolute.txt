@@ -3,3 +3,4 @@ C:\Users\Adam\Google Drive\BCIT\Term4\4976\assignments\2\DiplomaOptions\DiplomaO
 H:\MyCourses\COMP4976\assignments\2\DiplomaOptions\OptionsClient\bin\Debug\OptionsClient.exe.config
 C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsClient\obj\Debug\OptionsClient.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsClient\bin\Debug\OptionsClient.exe.config
+C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsClient\obj\Debug\OptionsClient.csprojResolveAssemblyReference.cache
