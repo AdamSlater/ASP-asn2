@@ -15,7 +15,18 @@
 
 <hr />
 
-<h3>@ViewBag.ResultMessage</h3>
+@if (ViewBag.messageFlag == 0)
+{
+    <div class="alert alert-success">
+        @ViewBag.ResultMessage
+    </div>
+}
+else if (ViewBag.messageFlag == 1)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ResultMessage
+    </div>
+}
 @using (Html.BeginForm("Create", "Roles"))
 {
     @Html.AntiForgeryToken()
