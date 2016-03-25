@@ -168,6 +168,7 @@ namespace DiplomaDataModel.Controllers
 
                     //add role
                    UserManager.AddToRole(UserManager.FindByEmail(user.Email).Id, "Student");
+                   UserManager.SetLockoutEnabled(UserManager.FindByEmail(user.Email).Id, false);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
