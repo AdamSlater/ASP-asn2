@@ -16,7 +16,7 @@
     @foreach (var year in ViewBag.yearTerms)
     {
         <option @if (year.IsDefault) { @Html.AttributeEncode("selected") } value="@year.YearTermId">
-            @year.Year &nbsp; @year.Term
+            @year.Year &nbsp; @if (year.Term == 10) { <text>Winter</text> } @if (year.Term == 20) { <text>Spring/Summer</text> } @if (year.Term == 30) { <text>Fall</text> } 
         </option>
     }
 </select>
