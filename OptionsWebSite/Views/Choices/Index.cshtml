@@ -91,6 +91,7 @@
         display: none
     }
 </style>
+<div id="tblSpinner" style="text-align:center"><img src='http://www.jasonkenison.com/uploads/blog/loading.gif' /></div>
 <table class="table table-striped table-hover addrowafter" id="reports">
     <tr>
         <th>Student Id</th>
@@ -166,6 +167,7 @@
             });
             $('.tr').addClass('hide');
             $('.' + visibleId).removeClass('hide');
+            $('#tblSpinner').addClass('hide');
         });
 
         

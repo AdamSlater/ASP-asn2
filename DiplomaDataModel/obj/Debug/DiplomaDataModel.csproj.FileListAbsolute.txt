@@ -154,6 +154,5 @@ C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\bin\Debug
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\bin\Debug\System.Web.WebPages.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\obj\Debug\DiplomaDataModel.csprojResolveAssemblyReference.cache
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\obj\Debug\DiplomaDataModel.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\DiplomaDataModel\obj\Debug\DiplomaDataModel.pdb
