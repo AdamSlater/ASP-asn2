@@ -19,8 +19,9 @@
 
     <div data-ng-controller="ctrl">
         <div class="wrapper row">
-            <div class="col-md-6 tab active" data-ng-click="url = 'forms/register.html'">Register</div>
-            <div class="col-md-6 tab"        data-ng-click="url = 'forms/signin.html'">Sign In</div>
+            <div class="col-md-4 tab active" data-ng-click="url = 'forms/register.html'">Register</div>
+            <div class="col-md-4 tab"        data-ng-click="url = 'forms/signin.html'">Sign In</div>
+            <div class="col-md-4 tab"        data-ng-click="url = 'forms/choice.html'">Make a Choice</div>
         </div>
         <br />
         <!-- nav -->
@@ -28,6 +29,8 @@
             <div data-ng-include=url></div>
         </div>
         <!-- view -->
+
+        <div id="message"></div>
     </div>
 <!-- jQuery -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

@@ -25,7 +25,11 @@ app.controller('ctrl', function ($scope) {
             data: JSON.stringify(param)
         }).done(function (data) {
             console.log(data);
-        }).fail(function (err) { console.warn(err); });
+            $("#message").html("<p style='color:green'>Register: SUCCESS</p>");
+        }).fail(function (err) {
+            console.warn(err);
+            $("#message").html("<p style='color:red'>Register: Please try again!</p>");
+        });
     };
 
     $scope.signin = function () {
@@ -46,7 +50,11 @@ app.controller('ctrl', function ($scope) {
         }).done(function (data) {
             console.log(data);
             document.cookie = "access_token=" + data["access_token"];
-        }).fail(function (err) { console.warn(err); });
+            $("#message").html("<p style='color:green'>Sign In: SUCCESS</p>");
+        }).fail(function (err) {
+            console.warn(err);
+            $("#message").html("<p style='color:red'>Sign In: Please try again!</p>");
+        });
     };
 });
 

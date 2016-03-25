@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 
 namespace OptionsWebAPI.Controllers
 {
@@ -21,6 +22,7 @@ namespace OptionsWebAPI.Controllers
     {
         private DiplomaContext db = new DiplomaContext();
 
+        // Chart
         public JToken GetAllChoices()
         {
             IEnumerable<Choice> choices = db.Choices.Include(c => c.FirstOption).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption).Include(c => c.YearTerm);
@@ -104,6 +106,16 @@ namespace OptionsWebAPI.Controllers
 
         }
 
+        [System.Web.Http.Route("GetDataForChoiceForm/{username}")]
+        public JToken GetDataForChoiceForm(string username)
+        {
+            JObject obj = new JObject();
+            obj.Add("options", JsonConvert.SerializeObject(db.Options.Select(n => n.Title).ToList()));
+            obj.Add("yearterms", JsonConvert.SerializeObject(db.YearTerms.ToList()));
+            obj.Add("prevchoices", JsonConvert.SerializeObject(db.Choices.Where(c => c.StudentId == username)));
+            return obj;
+        }
+
         [ResponseType(typeof(Choice))]
         public IHttpActionResult PostChoice(Choice choice)
         {
@@ -118,25 +130,17 @@ namespace OptionsWebAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = choice.ChoiceId }, choice);
         }
 
-        /*
-        
-        ajax post to /Token
-
-        grant_type password
-        username ...
-        password ...
-
-        data.access_token
-
-        
-        */
-
-
-        /*
-        authorize annotation
-        register - just add
-        sign in - get token (into session)
-        
-        */
+        [System.Web.Http.Route("GetALLChoicesForTable")]
+        public JToken GetALLChoicesForTable()
+        {
+            JObject obj = new JObject();
+            obj.Add("data", JsonConvert.SerializeObject(db.Choices.ToArray()));
+            obj.Add("options", JsonConvert.SerializeObject(db.Options.Select(c => c.Title)));
+            obj.Add("options-id", JsonConvert.SerializeObject(db.Options.Select(c => c.OptionId)));
+            obj.Add("yearterms-term", JsonConvert.SerializeObject(db.YearTerms.Select(c => c.Term)));
+            obj.Add("yearterms-year", JsonConvert.SerializeObject(db.YearTerms.Select(c => c.Year)));
+            obj.Add("yearterms-id", JsonConvert.SerializeObject(db.YearTerms.Select(c => c.YearTermId)));
+            return obj;
+        }
     }
 }

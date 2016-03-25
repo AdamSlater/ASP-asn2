@@ -441,3 +441,10 @@ C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebSite\obj\Debug\O
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebSite\obj\Debug\OptionsWebSite.csproj.GenerateResource.Cache
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebSite\obj\Debug\OptionsWebSite.dll
 C:\Users\joxched\Desktop\GitHub\ASP-A2-FINAL\ASP-asn2\OptionsWebSite\obj\Debug\OptionsWebSite.pdb
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Net.Http.Formatting.dll
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Web.Cors.dll
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Web.Http.Cors.dll
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Web.Http.dll
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Net.Http.Formatting.xml
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Web.Http.xml
+C:\inetpub\wwwroot\a2\DiplomaOptions\DiplomaOptions\OptionsWebSite\bin\System.Web.Http.Cors.xml
