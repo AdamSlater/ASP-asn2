@@ -16,7 +16,7 @@
     @foreach (var year in ViewBag.yearTerms)
     {
         <option @if (year.IsDefault) { @Html.AttributeEncode("selected") } value="@year.YearTermId">
-            @year.Year &nbsp; @year.Term
+            @year.Year &nbsp; @if (year.Term == 10) { <text>Winter</text> } @if (year.Term == 20) { <text>Spring/Summer</text> } @if (year.Term == 30) { <text>Fall</text> } 
         </option>
     }
 </select>
@@ -28,24 +28,40 @@
 </select>
 <br />
 <script>
+    var visibleId;
     $(document).ready(function () {
-        var visibleId = $('#yearterms').find(":selected").val();
-        $('.tr').each(function (index) {
-            if (!$(this).hasClass(visibleId))
-                $(this).addClass('hide');
-        });
+        visibleId = $('#yearterms').find(":selected").val();
+        ytfirst = visibleId;
+        ytsecond = visibleId;
+        ytthird = visibleId;
+        ytfourth = visibleId;
     });
     $('#yearterms').change(function (data) {
         $('.tr').addClass('hide');
         var c = $('#yearterms').find(":selected").val();
         $('.' + c).removeClass('hide');
+        ytfirst = c;
+        ytsecond = c;
+        ytthird = c;
+        ytfourth = c;
+        if (!data_success) {
+            alert("Data is not ready yet to display chart");
+            return;
+        }
+        d1(); d2(); d3(); d4();
     });
 
     $('#charttypes').change(function (data) {
         $('#charts, #reports').toggleClass('hide');
         var c = $('#charttypes').find(":selected").val();
         if (c == 'Chart')
-        { d1(); d2(); d3(); d4(); }
+        {
+            if (!data_success) {
+                alert("Data is not ready yet to display chart");
+                return;
+            }
+            d1(); d2(); d3(); d4();
+        }
     });
 </script>
 <br />
@@ -69,112 +85,36 @@
         </div>
     </div>                        
 </div>
-<div id="reports" class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.FirstOption.Title)*@
-                First Option
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.FourthOption.Title)*@
-                Second Option
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.SecondOption.Title)*@
-                Third Option
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.ThirdOption.Title)*@
-                Fourth Option
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.YearTerm.YearTermId)*@
-                Year Term
 
-
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StudentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StudentFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StudentLastName)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr class="tr @item.YearTermId">
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstOption.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FourthOption.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SecondOption.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ThirdOption.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.YearTerm.Year)&nbsp;
-                    @if (item.YearTerm.Term == 10)
-                    { <span>Winter</span> }
-                    @if (item.YearTerm.Term == 20)
-                    { <span>Spring/Summer</span> }
-                    @if (item.YearTerm.Term == 30)
-                    { <span>Fall</span> }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentLastName)
-                </td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-default" type="button" onclick="window.location.assign('/Choices/Edit/@item.ChoiceId')">
-                            <i class="fa fa-pencil-square-o"></i>
-                        </button>
-                        <button class="btn btn-default" type="button" onclick="window.location.assign('/Choices/Details/@item.ChoiceId')">
-                            <i class="fa fa-info-circle"></i>
-                        </button>
-                        <button class="btn btn-default" type="button" onclick="window.location.assign('/Choices/Delete/@item.ChoiceId')">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </div>
-                    @*@Html.ActionLink("Edit", "Edit", new { id=item.ChoiceId }) |*@
-
-                    @*@Html.ActionLink("Details", "Details", new { id=item.ChoiceId }) |*@
-                    @*@Html.ActionLink("Delete", "Delete", new { id=item.ChoiceId })*@
-                    @*<a href="@Url.Action("Delete", "Delete")"><i class="fa fa-trash  fa-2x"></i></a>*@
-                </td>
-            </tr>
-        }
-
-    </table>
-</div>
 <style>
     .highcharts-button {
         display: none
     }
 </style>
+<div id="tblSpinner" style="text-align:center"><img src='http://www.jasonkenison.com/uploads/blog/loading.gif' /></div>
+<table class="table table-striped table-hover addrowafter" id="reports">
+    <tr>
+        <th>Student Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>First Choice</th>
+        <th>Second Choice</th>
+        <th>Third Choice</th>
+        <th>Fourth Choice</th>
+        <th>Year Term</th>
+        <th></th>
+    </tr>
+</table>
 <script>
     var optionsStrings;
-    var first, second, third, fourth;
+    var first = new Object(), second = new Object(), third = new Object(), fourth = new Object();
+    var ytfirst, ytsecond, ytthird, ytfourth;
+    var data_success = false;
 
     $(document).ready(function () {
         jQuery.support.cors = true;
         $.ajax({
-            url: "http://localhost:58011/api/choices"
+            url: "http://a2api.adamslatertech.com/api/Choices/GetAllChoices"
         }).done(function (data) {
             var num = data.numYearTerms;
             var yeartermData = new Object();
@@ -185,14 +125,63 @@
                     yeartermData[i] = item;
             });
 
-            console.log(yeartermData);
-
-            //TODO: loop through yeartermsData
-                // populate first, second...
-            console.log(data);
+            $.each(yeartermData, function (yeartermID, obj) {
+                first[yeartermID]  = obj["first"];
+                second[yeartermID] = obj["second"];
+                third[yeartermID]  = obj["third"];
+                fourth[yeartermID] = obj["fourth"];
+            });
+            data_success = true;
         });
+
+        $.get("http://a2api.adamslatertech.com/getallchoicesfortable", function (data) {
+            var d = data["data"];
+            d = $.parseJSON(d);
+            var options = $.parseJSON(data["options"]);
+            var options_id = $.parseJSON(data["options-id"]);
+            var terms = $.parseJSON(data["yearterms-term"]);
+            var years = $.parseJSON(data["yearterms-year"]);
+            var yt_id = $.parseJSON(data["yearterms-id"]);
+            var yt_nm = new Object();
+            var op_nm = new Object();
+            $.each(options, function (i, v) { op_nm[options_id[i]] = options[i]; });
+            $.each(yt_id, function (i, v) { var x = terms[i]; var n; if (x == 10) n = "Winter "; if (x == 20) n = "Spring/Summer "; if (x == 30) n = "Fall "; yt_nm[v] = n + years[i] });
+            $.each(d, function (index, value) {
+                var edit = '"/Choices/Edit/' + value["ChoiceId"] + '"';
+                var detail = '"/Choices/Details/' + value["ChoiceId"] + '"';
+                var deletes = '"/Choices/Delete/' + value["ChoiceId"] + '"';
+                $(".addrowafter").append("<tr class='tr " + value["YearTermId"] + "'><td>" + value["StudentId"] + "</td><td>" + value["StudentFirstName"] + "</td><td>" + value["StudentLastName"] +
+                                         "</td><td>" + op_nm[value["FirstChoiceOptionId"]] + "</td><td>" + op_nm[value["SecondChoiceOptionId"]] +
+                                         "</td><td>" + op_nm[value["ThirdChoiceOptionId"]] + "</td><td>" + op_nm[value["FourthChoiceOptionId"]] +
+                                         "</td><td>" + yt_nm[value["YearTermId"]]   + "</td><td>" +
+                                         "<div class='btn-group' role='group'>" +
+                                         "<button class='btn btn-default' type='button' onclick='window.location.assign(" + edit + ")'>" +
+                                            "<i class='fa fa-pencil-square-o'></i>" +
+                                         "</button>" +
+                                         "<button class='btn btn-default' type='button' onclick='window.location.assign(" + detail + ")'>" +
+                                            "<i class='fa fa-info-circle'></i>" +
+                                         "</button>" +
+                                         "<button class='btn btn-default' type='button' onclick='window.location.assign(" + deletes +")'>" +
+                                            "<i class='fa fa-trash'></i>" +
+                                         "</button></div></td></tr>");
+            });
+            $('.tr').addClass('hide');
+            $('.' + visibleId).removeClass('hide');
+            $('#tblSpinner').addClass('hide');
+        });
+
+        
     });
     function d1() {
+        var theData = [];
+
+        for (var i = 0; i < optionsStrings.length; i++)
+        {
+            var obj = new Object();
+            obj.name = optionsStrings[i];
+            obj.y = first[ytfirst][i];
+            theData.push(obj);
+        }
         $('#choices-1').highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -220,33 +209,21 @@
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'Percentage',
                 colorByPoint: true,
-                data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 0.00
-                }, {
-                    name: 'Chrome',
-                    y: 0.00,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 0.00
-                }, {
-                    name: 'Safari',
-                    y: 0.00
-                }, {
-                    name: 'Opera',
-                    y: 0.00
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.00
-                }]
+                data: theData
             }]
         });
     }
     function d2() {
+        var theData = [];
+
+        for (var i = 0; i < optionsStrings.length; i++) {
+            var obj = new Object();
+            obj.name = optionsStrings[i];
+            obj.y = second[ytsecond][i];
+            theData.push(obj);
+        }
         $('#choices-2').highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -274,33 +251,21 @@
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'Percentage',
                 colorByPoint: true,
-                data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 56.33
-                }, {
-                    name: 'Chrome',
-                    y: 24.03,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 10.38
-                }, {
-                    name: 'Safari',
-                    y: 4.77
-                }, {
-                    name: 'Opera',
-                    y: 0.91
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2
-                }]
+                data: theData
             }]
         });
     }
     function d3() {
+        var theData = [];
+
+        for (var i = 0; i < optionsStrings.length; i++) {
+            var obj = new Object();
+            obj.name = optionsStrings[i];
+            obj.y = third[ytthird][i];
+            theData.push(obj);
+        }
         $('#choices-3').highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -328,33 +293,21 @@
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'Percentage',
                 colorByPoint: true,
-                data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 56.33
-                }, {
-                    name: 'Chrome',
-                    y: 24.03,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 10.38
-                }, {
-                    name: 'Safari',
-                    y: 4.77
-                }, {
-                    name: 'Opera',
-                    y: 0.91
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2
-                }]
+                data: theData
             }]
         });
     }
     function d4() {
+        var theData = [];
+
+        for (var i = 0; i < optionsStrings.length; i++) {
+            var obj = new Object();
+            obj.name = optionsStrings[i];
+            obj.y = fourth[ytfourth][i];
+            theData.push(obj);
+        }
         $('#choices-4').highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -382,29 +335,9 @@
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'Percentage',
                 colorByPoint: true,
-                data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 56.33
-                }, {
-                    name: 'Chrome',
-                    y: 24.03,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 10.38
-                }, {
-                    name: 'Safari',
-                    y: 4.77
-                }, {
-                    name: 'Opera',
-                    y: 0.91
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2
-                }]
+                data: theData
             }]
         });
     }

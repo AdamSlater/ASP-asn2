@@ -218,6 +218,10 @@ packages
 # Visual Studio 2015 cache/options directory
 .vs/
 
+OptionsClient/obj
+DiplomaDataModel/obj
+DiplomaDataModel/bin
+
 
 #DATABASE
 *.mdf
